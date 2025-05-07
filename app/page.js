@@ -253,7 +253,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="">
+      <div className="w-full h-full  relative z-10">
         <Footer />
       </div>
     </div>
