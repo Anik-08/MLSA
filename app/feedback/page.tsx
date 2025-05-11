@@ -84,7 +84,7 @@ const FeedbackForm: React.FC = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-cover bg-center py-10 px-4"
-            style={{ backgroundImage: "url('/Feedback Bg.png')" }}
+            style={{ backgroundImage: "url('/Feedback Bg.jpg')" }}
         >
             <div className="w-full max-w-4xl bg-white/10 backdrop-blur-xl shadow-xl rounded-xl p-8 space-y-6">
                 <h1 className="text-4xl font-bold text-center text-white mb-4">Content 101 Feedback Form</h1>
