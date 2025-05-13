@@ -21,6 +21,7 @@ const FeedbackForm: React.FC = () => {
 
     const [validated, setValidated] = useState(false);
     const [showToast, setShowToast] = useState({ message: '', type: '' });
+    const [isloading, setIsLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,7 +30,7 @@ const FeedbackForm: React.FC = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         const required = ["name", 'usn', 'branch', 'collegeMail', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8'];
-
+        setIsLoading(true);
         const missing = required.some((field) => {
             const val = formData[field as keyof typeof formData];
             return val === "" || val === 0;
@@ -56,6 +57,11 @@ const FeedbackForm: React.FC = () => {
             setShowToast({ message: 'Feedback submitted successfully!', type: 'success' });
         } catch (err: any) {
             setShowToast({ message: err.message || 'Submission failed', type: 'error' });
+        } finally {
+            setIsLoading(false);
+            setTimeout(() => {
+                setShowToast({ message: '', type: '' });
+            }, 3000);
         }
     };
 
@@ -144,7 +150,7 @@ const FeedbackForm: React.FC = () => {
 
                     {/* Rating Questions */}
                     <StarRating name="q1" question="1. Overall, how satisfied were you with the Content 101 event?" />
-                    <StarRating name="q2" question="2. How well did the sessions meet your expectations?" />
+                    <StarRating name="q2" question="2. How well did the sessions meet your expectations in terms of content quality and relevance?" />
                     <label className="block text-white font-medium mb-2">3. Which topic or session did you find most valuable, and why?</label>
                         <textarea
                             name="q3"
@@ -153,7 +159,7 @@ const FeedbackForm: React.FC = () => {
                             onChange={handleChange} // Changed here
                             className="w-full p-2 rounded-lg bg-white/20 text-white focus:outline-none"
                         />
-                    <StarRating name="q4" question="4. Rate the effectiveness and clarity of the speakers' presentations." />
+                    <StarRating name="q4" question="4. How would you rate the effectiveness and clarity of the speakers' presentations?" />
                     <label className="block text-white font-medium mb-2">5. Did the event provide actionable insights that you can apply to your work or projects?</label>
                         <select
                             name="q5"
@@ -166,8 +172,8 @@ const FeedbackForm: React.FC = () => {
                             <option className="bg-slate-400 text-black" value="Good">Good</option>
                             <option className="bg-slate-400 text-black" value="Excellent">Excellent</option>
                         </select>
-                    <StarRating name="q6" question="6. Rate the event’s organization (scheduling, flow, logistics)." />
-                    <label className="block text-white font-medium mb-2">7. Were the interactive elements (Q&A sessions, discussions, etc.) helpful in deepening your understanding of the topics?  </label>
+                    <StarRating name="q6" question="6. How do you rate the event&apos;s organization (scheduling, flow, and logistics)?" />
+                    <label className="block text-white font-medium mb-2">7. Were the interactive elements (Q&A sessions, discussions, etc.) helpful in deepening your understanding of the topics?</label>
                         <select
                             name="q7"
                             value={formData.q7}
@@ -178,7 +184,8 @@ const FeedbackForm: React.FC = () => {
                             <option className="bg-slate-400 text-black" value="Yes">Yes</option>
                             <option className="bg-slate-400 text-black" value="No">No</option>
                         </select>
-                    <StarRating name="q8" question="8. How likely are you to attend/recommend future events like Content 101?" outOf={10} />
+                    <StarRating name="q8" question="8. How likely are you to attend future events like Content 101, or recommend them to others?" outOf={10} />
+                    <label className="block text-white font-medium mb-2">9. If you have any further feedback or suggestions, please let us know!</label>
                     <textarea
                         name="q8comment"
                         placeholder="Optional comment"
@@ -193,8 +200,9 @@ const FeedbackForm: React.FC = () => {
                         <button
                             type="submit"
                             className="px-6 py-2 text-white bg-blue-800 hover:bg-white hover:text-black rounded-lg transition"
+                            disabled={isloading}
                         >
-                            Submit Feedback
+                            {isloading ? 'Submitting...' : 'Submit Feedback'}
                         </button>
 
                         {/* Toast Notification (below button) */}
