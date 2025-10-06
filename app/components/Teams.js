@@ -72,7 +72,7 @@ const Teams = () => {
         onClick={() => router.push(`/teams/${member.path}`)}
         onMouseEnter={() => setHoveredIndex(index)}
         onMouseLeave={() => setHoveredIndex(null)}
-        className="team-card flex flex-shrink-0 flex-col justify-center items-center cursor-pointer w-[200px] h-[250px] max-sm:w-[150px] max-sm:h-[200px] transition-all duration-300 relative"
+        className="team-card flex flex-shrink-0 flex-col justify-center items-center cursor-pointer w-[200px] h-[200px] max-sm:w-[150px] max-sm:h-[150px] transition-all duration-300 relative"
         style={{
           ...calculate3DEffect(index),
           transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
@@ -88,10 +88,7 @@ const Teams = () => {
           style={{
             background: `conic-gradient(from ${Date.now() / 20 % 360}deg at 50% 50%, #4793F4, #6366F1, #4793F4)`,
             padding: '2px',
-            animation: hoveredIndex === index ? 'spin 4s linear infinite' : 'none',
-            width: '200px',
-            height: '200px',
-            top: '0'
+            animation: hoveredIndex === index ? 'spin 4s linear infinite' : 'none'
           }}
         >
           <div className="w-full h-full rounded-full bg-[#0a0a1a]"></div>
@@ -99,22 +96,18 @@ const Teams = () => {
 
         {/* Enhanced Holographic circle */}
         <div 
-          className={`absolute rounded-full transition-all duration-300 ${
+          className={`absolute inset-2 rounded-full transition-all duration-300 ${
             hoveredIndex === index ? 'opacity-30' : 'opacity-0'
           }`}
           style={{
             background: 'radial-gradient(circle, rgba(71,147,244,0.2) 0%, rgba(17,24,39,0) 70%)',
-            boxShadow: hoveredIndex === index ? '0 0 30px rgba(71,147,244,0.5)' : 'none',
-            width: '196px',
-            height: '196px',
-            top: '2px',
-            left: '2px'
+            boxShadow: hoveredIndex === index ? '0 0 30px rgba(71,147,244,0.5)' : 'none'
           }}
         ></div>
 
         {/* Digital circuit pattern - only render when hovered */}
         {hoveredIndex === index && (
-          <div className="absolute rounded-full opacity-20 z-0" style={{ width: '192px', height: '192px', top: '4px', left: '4px' }}>
+          <div className="absolute inset-4 rounded-full opacity-20 z-0">
             <div className="absolute top-1/2 left-0 w-full h-[1px] bg-blue-400"></div>
             <div className="absolute top-0 left-1/2 w-[1px] h-full bg-blue-400"></div>
             <div className="absolute top-1/2 left-1/2 w-3 h-3 rounded-full bg-blue-400 transform -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
@@ -155,22 +148,16 @@ const Teams = () => {
           )}
         </div>
 
-        {/* Enhanced Futuristic name display - Always visible with enhanced hover effect */}
+        {/* Enhanced Futuristic name display */}
+
+        {/* Enhanced Futuristic name display */}
         <div 
-          className={`mt-4 transition-all duration-500 relative ${
-            hoveredIndex === index ? 'transform scale-110' : 'transform scale-100'
-          }`}
+          className="mt-4 transition-all duration-500 relative opacity-100 transform translate-y-0"
         >
-          <p className={`text-sm font-bold text-white relative z-10 px-3 py-1 rounded-full border transition-all duration-300 ${
-            hoveredIndex === index 
-              ? 'bg-gradient-to-r from-blue-500/30 to-indigo-500/30 border-blue-500/50 shadow-[0_0_20px_rgba(71,147,244,0.5)]' 
-              : 'bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border-blue-500/20'
-          } backdrop-blur-sm`}>
+          <p className="text-sm font-bold text-white relative z-10 px-3 py-1 rounded-full bg-gradient-to-r from-blue-500/20 to-indigo-500/20 backdrop-blur-sm border border-blue-500/30">
             {member.name}
           </p>
-          <div className={`absolute inset-0 rounded-full transition-all duration-300 ${
-            hoveredIndex === index ? 'blur-sm bg-blue-500/30' : 'blur-sm bg-blue-500/10'
-          }`}></div>
+          <div className="absolute inset-0 blur-sm bg-blue-500/20 rounded-full"></div>
         </div>
       </div>
     ));
@@ -316,6 +303,184 @@ const teamData = [
   { name: "Technical", path: "technical", image: "/images/teams/technical.png" },
   { name: "Designers", path: "designers", image: "/images/teams/designers.png" },
   { name: "Curation", path: "curation", image: "/images/teams/curation.png" },
+
 ];
 
 export default Teams;
+
+
+
+
+// "use client";
+// import React, { useRef, useEffect, useState, useMemo, useCallback } from "react";
+// import AOS from "aos";
+// import "aos/dist/aos.css";
+// import Image from "next/image";
+// import { useRouter } from "next/navigation";
+// import throttle from "lodash/throttle";  // Install lodash for throttling
+
+// const Teams = () => {
+//   const containerRef = useRef(null);
+//   const router = useRouter();
+//   const [hoveredIndex, setHoveredIndex] = useState(null);
+//   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+//   // Initialize AOS for animations
+//   useEffect(() => {
+//     AOS.init({
+//       offset: 200,
+//       duration: 300,
+//       easing: "ease-out",
+//       once: true,
+//       mirror: false,
+//     });
+//   }, []);
+
+//   // Throttle mouse movement for better performance
+//   // const handleMouseMove = (e) => {
+//   //   setMousePosition({ x: e.clientX, y: e.clientY });
+//   // };
+//   // useEffect(() => {
+//   //   window.addEventListener("mousemove", handleMouseMove);
+//   //   return () => window.removeEventListener("mousemove", handleMouseMove);
+//   // }, [handleMouseMove]);
+
+//   useEffect(() => {
+//   const handleMouseMove = (e) => {
+//     setMousePosition({ x: e.clientX, y: e.clientY });
+//   };
+
+//   window.addEventListener("mousemove", handleMouseMove);
+
+//   return () => {
+//     window.removeEventListener("mousemove", handleMouseMove);
+//   };
+// }, []);  // ✅ Empty dependency array
+
+
+
+//   // const handleMouseMove = useCallback(
+//   //   throttle((e) => {
+//   //     setMousePosition({ x: e.clientX, y: e.clientY });
+//   //   }, 100),
+//   //   [setMousePosition]
+//   // );
+
+
+//   // Memoize scroll distance
+//   // const scrollDistance = useMemo(() => {
+//   //   return 0.5 * (containerRef.current?.offsetWidth || 210);
+//   // }, [containerRef.current?.offsetWidth]);
+
+//   const [scrollDistance, setScrollDistance] = useState(210);  // Default value
+
+//   useEffect(() => {
+//     const updateScrollDistance = () => {
+//       setScrollDistance(0.5 * (containerRef.current?.offsetWidth || 210));
+//     };
+
+//     updateScrollDistance();  // Set initial value
+//     window.addEventListener("resize", updateScrollDistance);
+
+//     return () => window.removeEventListener("resize", updateScrollDistance);
+//   }, [containerRef]);
+
+
+//   const scrollLeft = () => {
+//     if (containerRef.current) containerRef.current.scrollLeft -= scrollDistance;
+//   };
+
+//   const scrollRight = () => {
+//     if (containerRef.current) containerRef.current.scrollLeft += scrollDistance;
+//   };
+
+//   // Optimized 3D effect
+//   const calculate3DEffect = (index) => {
+//     if (hoveredIndex !== index) return {};
+
+//     const card = containerRef.current?.children[index];
+//     if (!card) return {};
+
+//     const rect = card.getBoundingClientRect();
+//     const centerX = rect.left + rect.width / 2;
+//     const centerY = rect.top + rect.height / 2;
+
+//     const rotateY = (mousePosition.x - centerX) / 20;
+//     const rotateX = (centerY - mousePosition.y) / 20;
+
+//     return {
+//       transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`,
+//     };
+//   };
+
+//   return (
+//     <div className="relative w-full flex flex-col items-center justify-center h-auto py-8 gap-8 bg-[rgba(10,10,26,0.7)] backdrop-blur-lg border border-white/10 rounded-[2rem]">
+
+//       {/* Background Grid */}
+//       <div className="absolute inset-0 overflow-hidden">
+//         <div className="absolute w-full h-full bg-[url('/images/grid.svg')] bg-repeat opacity-5"></div>
+//       </div>
+
+//       {/* Heading */}
+//       <div className="text-center w-full relative">
+//         <h1 className="text-4xl font-[CB] sm:text-5xl lg:text-6xl font-bold mb-2 text-white" data-aos="zoom-in">
+//           Meet Our Team
+//         </h1>
+//         <p className="text-blue-300/80 max-w-md mx-auto mb-4 text-sm" data-aos="fade-up" data-aos-delay="100">
+//           The brilliant minds powering MLSA CIT
+//         </p>
+//       </div>
+
+//       {/* Team Cards */}
+//       <div
+//         ref={containerRef}
+//         className="space-x-6 w-full h-full flex scroll-smooth px-8 py-8 whitespace-nowrap overflow-x-auto no-scrollbar relative"
+//       >
+//         {teamData.map((member, index) => (
+//           <div
+//             key={index}
+//             onClick={() => router.push(`/teams/${member.path}`)}
+//             onMouseEnter={() => setHoveredIndex(index)}
+//             onMouseLeave={() => setHoveredIndex(null)}
+//             className="team-card flex flex-shrink-0 flex-col justify-center items-center cursor-pointer w-[200px] h-[200px] max-sm:w-[150px] max-sm:h-[150px] transition-all duration-300 relative"
+//             style={calculate3DEffect(index)}
+//             data-aos="zoom-out"
+//             data-aos-delay={index * 50}
+//           >
+//             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-indigo-600"></div>
+
+//             {/* Image */}
+//             <div className="relative z-10">
+//               <Image
+//                 src={member.image}
+//                 alt={member.name}
+//                 width={90}
+//                 height={90}
+//                 className="transition-all duration-300"
+//               />
+//             </div>
+
+//             {/* Name */}
+//             <div className="mt-4">
+//               <p className="text-sm font-bold text-white">{member.name}</p>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// const teamData = [
+//   { name: "Advisor", path: "advisor", image: "/images/teams/advisor.png" },
+//   { name: "President", path: "president", image: "/images/teams/president.png" },
+//   { name: "Vice President", path: "vp", image: "/images/teams/vice-president.png" },
+//   { name: "Social Media", path: "socmed", image: "/images/teams/social-media.png" },
+//   { name: "Technical", path: "technical", image: "/images/teams/technical.png" },
+//   { name: "Designers", path: "designers", image: "/images/teams/designers.png" },
+//   { name: "Marketing", path: "marketing", image: "/images/teams/marketing.png" },
+//   { name: "Curation", path: "curation", image: "/images/teams/curation.png" },
+//   { name: "Treasure", path: "treasure", image: "/images/teams/treasure.png" },
+// ];
+
+// export default Teams;
