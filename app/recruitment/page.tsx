@@ -846,7 +846,7 @@ const RecruitmentForm: React.FC = () => {
                                     value={formData.phoneNumber}
                                     onChange={handleChange}
                                     required
-                                    placeholder='+91 XXXXX XXXXX'
+                                    placeholder='XXXXX XXXXX'
                                     className={`w-full py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg sm:rounded-xl bg-slate-800/50 text-white placeholder-slate-400 border-2 ${
                                         validated && !formData.phoneNumber ? 'border-yellow-400' : 'border-slate-700'
                                     } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm text-sm sm:text-base`}
