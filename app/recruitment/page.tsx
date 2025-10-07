@@ -64,6 +64,7 @@ const RecruitmentForm: React.FC = () => {
     }));
     };
 
+    // In the getRequiredFields function, update the Design team fields:
     const getRequiredFields = () => {
         const baseFields = ['name', 'usn', 'branch', 'officialMail', 'phoneNumber', 'otherClubs', 'socialLinks'];
         const teamFields: string[] = [];
@@ -75,7 +76,8 @@ const RecruitmentForm: React.FC = () => {
         } else if (formData.team === "Social Media") {
             teamFields.push('viralCampaign', 'technicalSimplification', 'socialMediaRole', 'communityDifference', 'inspiringCampaign');
         } else if (formData.team === "Design") {
-            teamFields.push('whyDesign', 'designSoftware', 'conflictResolution', 'designExperience', 'instagramProcess', 'portfolio');
+            // Removed 'portfolio' from required fields
+            teamFields.push('whyDesign', 'designSoftware', 'conflictResolution', 'designExperience', 'instagramProcess');
         }
 
         return [...baseFields, ...teamFields];
@@ -638,7 +640,7 @@ const RecruitmentForm: React.FC = () => {
                 <div className="space-y-3 bg-slate-800/30 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700/50 hover:border-purple-500/30 transition-all duration-300">
                     <label className="block text-white font-medium text-base sm:text-lg leading-relaxed">
                         6. Please share your portfolio, if you have one.
-                        <span className="text-yellow-400 ml-1">*</span>
+                        {/* Removed the asterisk - no longer required */}
                     </label>
                     <input
                         type="url"
@@ -647,14 +649,10 @@ const RecruitmentForm: React.FC = () => {
                         onChange={handleChange}
                         placeholder="https://behance.net/yourname or https://dribbble.com/yourname"
                         className={`w-full py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg sm:rounded-xl bg-slate-800/50 text-white placeholder-slate-400 border-2 ${
-                            validated && !formData.portfolio ? 'border-yellow-400' : 'border-slate-700'
+                            validated && !formData.portfolio ? 'border-slate-700' : 'border-slate-700'
                         } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm text-sm sm:text-base`}
                     />
-                    {validated && !formData.portfolio && (
-                        <p className="text-yellow-400 text-xs sm:text-sm flex items-center gap-1">
-                            <span>⚠</span> Portfolio link is required
-                        </p>
-                    )}
+                    {/* Removed the validation error message */}
                 </div>
             </div>
         );
