@@ -106,7 +106,7 @@ const Footer = () => {
                 <FaInstagram />
               </a>
               <a
-                href="https://github.com/"
+                href="https://github.com/mlsacit"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gray-800 p-2 rounded-full hover:bg-gray-600 transition-colors"

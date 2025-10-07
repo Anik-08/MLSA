@@ -164,7 +164,7 @@ export default function Home() {
     className="group relative px-6 py-3 bg-gradient-to-r from-[#8AAAE5] to-[#1E2761] text-white font-bold rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50 max-sm:px-4 max-sm:py-2 max-sm:text-xs max-sm:w-full max-sm:justify-center md:px-4 md:py-2 md:text-sm flex-shrink-0"
   >
     <span className="relative z-10 flex items-center gap-2 justify-center">
-      Join Us
+      Recruitment Form
       <svg 
         className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 max-sm:w-3 max-sm:h-3 md:w-4 md:h-4" 
         fill="none" 

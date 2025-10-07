@@ -56,7 +56,7 @@ const Page = () => {
         {/* Title Section */}
         <div className="mb-20 mt-4" data-aos="fade-down">
           <h1 className="text-5xl md:text-7xl font-bold text-center text-white font-[Excon] mb-4 tracking-tight">
-            Curation Team
+            Curation & Documentation 
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent mx-auto mb-6"></div>
           <p className="text-center text-white/70 text-lg font-[GMVF] max-w-2xl mx-auto">
@@ -185,7 +185,7 @@ const Page = () => {
                       
                       <div className="relative w-32 h-32 rounded-full border-2 border-purple-400/30 group-hover:border-purple-400/60 transition-all duration-500 overflow-hidden">
                         <Image
-                          src="/images/individual pics/Natalia.jpg"
+                          src="/images/individual pics/natalia.jpg"
                           alt="Natalia Mathews"
                           fill
                           className="object-cover"
