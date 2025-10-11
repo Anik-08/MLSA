@@ -779,13 +779,13 @@ const RecruitmentForm: React.FC = () => {
                                 <label className="block text-xs sm:text-sm font-semibold text-blue-200">
                                     Are you a 3rd Semester or MCA student? <span className="text-yellow-400">*</span>
                                 </label>
-                                <div className="flex flex-col space-y-3"> {/* Stack vertically */}
+                                <div className="flex flex-col space-y-3"> 
                                     <label className="flex items-center space-x-3 text-sm sm:text-base">
                                         <input
                                             type="radio"
                                             name="studentType"
                                             value="3rd Semester"
-                                            checked={formData.studentType === "3rd Sem"}
+                                            checked={formData.studentType === "3rd Semester"}
                                             onChange={handleChange}
                                             className="form-radio w-6 h-6" // Increase size
                                         />
@@ -796,7 +796,7 @@ const RecruitmentForm: React.FC = () => {
                                             type="radio"
                                             name="studentType"
                                             value="MCA student"
-                                            checked={formData.studentType === "MCA"}
+                                            checked={formData.studentType === "MCA student"}
                                             onChange={handleChange}
                                             className="form-radio w-6 h-6" // Increase size
                                         />
