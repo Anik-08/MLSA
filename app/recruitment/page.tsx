@@ -13,7 +13,7 @@ const RecruitmentForm: React.FC = () => {
         name: "",
         usn: "",
         branch: "",
-        semester: false,
+        studentType: "",
         officialMail: "",
         phoneNumber: "",
         team: "",
@@ -52,16 +52,14 @@ const RecruitmentForm: React.FC = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const teams = ["Technical", "Curation & Documentation", "Design", "Social Media"];
-    const branches = ['ISE', 'CSE', 'CSE IOT', 'AIML', 'ECE', 'MECH', 'CIVIL', 'EEE'];
+    const branches = ['ISE', 'CSE', 'CSE IOT', 'AIML', 'ECE', 'MECH', 'CIVIL', 'EEE', 'MCA'];
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const target = e.target as HTMLInputElement;
-    const { name, value, type, checked } = target;
-
-    setFormData(prev => ({
-        ...prev,
-        [name]: type === 'checkbox' ? checked : value,
-    }));
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value, // Update for radio button
+        }));
     };
 
     // In the getRequiredFields function, update the Design team fields:
@@ -91,9 +89,9 @@ const RecruitmentForm: React.FC = () => {
         const missing = requiredFields.some(field => {
             const val = formData[field as keyof typeof formData];
             return val === "" || val === null;
-        });
+        }); 
 
-        if (missing || !formData.semester || formData.team === "") {
+        if (missing || formData.studentType === "") { // Replace semester validation
             setValidated(true);
             setShowToast({ message: 'Please fill in all required fields', type: 'error' });
             setTimeout(() => setShowToast({ message: '', type: '' }), 3000);
@@ -121,7 +119,7 @@ const RecruitmentForm: React.FC = () => {
             if (!res.ok) throw new Error(data.message);
 
             setFormData({
-                name: "", usn: "", branch: "", semester: false, officialMail: "",
+                name: "", usn: "", branch: "", studentType: "", officialMail: "",
                 phoneNumber: "", team: "",
                 technicalContribution: "", teamExperience: "", deadlineHandling: "",
                 topSkills: "", projectExperience: "",
@@ -779,33 +777,35 @@ const RecruitmentForm: React.FC = () => {
                             {/* Semester Checkbox */}
                             <div className="space-y-2">
                                 <label className="block text-xs sm:text-sm font-semibold text-blue-200">
-                                    Semester <span className="text-yellow-400">*</span>
+                                    Are you a 3rd Semester or MCA student? <span className="text-yellow-400">*</span>
                                 </label>
-                                <div className="flex items-center space-x-3 py-2">
-                                    <label className="relative inline-flex items-center cursor-pointer group">
+                                <div className="flex flex-col space-y-3"> {/* Stack vertically */}
+                                    <label className="flex items-center space-x-3 text-sm sm:text-base">
                                         <input
-                                            type="checkbox"
-                                            name="semester"
-                                            checked={formData.semester}
-                                            
+                                            type="radio"
+                                            name="studentType"
+                                            value="3rd Semester"
+                                            checked={formData.studentType === "3rd Sem"}
                                             onChange={handleChange}
-                                            className="sr-only peer"
+                                            className="form-radio w-6 h-6" // Increase size
                                         />
-                                        <div className="w-6 h-6 bg-slate-800/50 border-2 border-slate-600 rounded-md peer-checked:bg-gradient-to-br peer-checked:from-blue-500 peer-checked:to-blue-600 peer-checked:border-blue-400 transition-all duration-300 flex items-center justify-center group-hover:border-blue-400/50 group-hover:shadow-lg group-hover:shadow-blue-500/20">
-                                            {formData.semester && (
-                                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
-                                                </svg>
-                                            )}
-                                        </div>
-                                        <span className="ml-3 text-white text-sm sm:text-base group-hover:text-blue-300 transition-colors duration-300">
-                                            I am in 3rd Semester
-                                        </span>
+                                        <span>3rd Semester</span>
+                                    </label>
+                                    <label className="flex items-center space-x-3 text-sm sm:text-base">
+                                        <input
+                                            type="radio"
+                                            name="studentType"
+                                            value="MCA student"
+                                            checked={formData.studentType === "MCA"}
+                                            onChange={handleChange}
+                                            className="form-radio w-6 h-6" // Increase size
+                                        />
+                                        <span>MCA student</span>
                                     </label>
                                 </div>
-                                {validated && !formData.semester && (
+                                {validated && !formData.studentType && (
                                     <p className="text-yellow-400 text-xs sm:text-sm flex items-center gap-1">
-                                        <span>⚠</span> You must be in 3rd semester to apply
+                                        <span>⚠</span> Please select your student type
                                     </p>
                                 )}
                             </div>
@@ -845,6 +845,8 @@ const RecruitmentForm: React.FC = () => {
                                     onChange={handleChange}
                                     required
                                     placeholder='XXXXX XXXXX'
+                                    maxLength={10}
+                                    minLength={10}
                                     className={`w-full py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg sm:rounded-xl bg-slate-800/50 text-white placeholder-slate-400 border-2 ${
                                         validated && !formData.phoneNumber ? 'border-yellow-400' : 'border-slate-700'
                                     } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm text-sm sm:text-base`}

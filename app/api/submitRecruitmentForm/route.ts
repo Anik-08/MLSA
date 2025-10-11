@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const name = formData.name as string;
     const usn = formData.usn as string;
     const branch = formData.branch as string;
-    const semester = formData.semester as boolean;
+    const studentType = formData.studentType as string;
     const officialMail = formData.officialMail as string;
     const phoneNumber = formData.phoneNumber as string;
     const team = formData.team as string;
@@ -101,7 +101,7 @@ export async function POST(req: Request) {
       Name: name || '',
       USN: usn || '',
       Branch: branch || '',
-      Semester: semester || '',
+      StudentType: studentType || '',
       OfficialEmail: officialMail || '',
       PhoneNumber: phoneNumber || '',
       Team: team || '',
