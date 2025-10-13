@@ -149,34 +149,6 @@ export default function Home() {
           <Navbar />
         </div>
         {/* Recruitment Banner - Absolute positioning */}
-<div className="absolute top-20 left-0 right-0 z-40 w-full flex items-center justify-between px-6 py-4 bg-gradient-to-r from-[#010a1c] via-[#010d46] to-[#000765] backdrop-blur-sm border-y border-[#1E2761]/30 max-sm:top-16 max-sm:px-3 max-sm:py-2 mt-2 max-sm:mt-1 max-sm:flex-col max-sm:gap-3 md:px-4 md:py-3">
-  {/* Left side - Text with accent bar */}
-  <div className="flex items-center gap-4 max-sm:gap-2 max-sm:w-full max-sm:justify-center md:gap-3">
-    <div className="w-1 h-12 bg-gradient-to-b from-[#8AAAE5] to-[#1E2761] rounded-full max-sm:h-6 md:h-10"></div>
-    <h2 className="text-2xl md:text-xl lg:text-2xl xl:text-3xl font-bold text-white font-[CB] max-sm:text-xs max-sm:text-center md:text-base">
-      Ready to make an <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#8AAAE5] to-[#408EC6]">Impact?</span> Join us At MLSACIT
-    </h2>
-  </div>
-
-  {/* Right side - Join Us Button */}
-  <button
-    onClick={() => window.location.href = '/recruitment'}
-    className="group relative px-6 py-3 bg-gradient-to-r from-[#8AAAE5] to-[#1E2761] text-white font-bold rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50 max-sm:px-4 max-sm:py-2 max-sm:text-xs max-sm:w-full max-sm:justify-center md:px-4 md:py-2 md:text-sm flex-shrink-0"
-  >
-    <span className="relative z-10 flex items-center gap-2 justify-center">
-      Recruitment Form
-      <svg 
-        className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 max-sm:w-3 max-sm:h-3 md:w-4 md:h-4" 
-        fill="none" 
-        stroke="currentColor" 
-        viewBox="0 0 24 24"
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-      </svg>
-    </span>
-    <div className="absolute inset-0 bg-gradient-to-r from-[#1E2761] to-[#408EC6] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-  </button>
-</div>
         <div className="logo-custom absolute mt-32 w-full flex justify-center max-custom:h-[36rem] max-custom:mt-[9.4rem]">
           <Image
             ref={logoRef}
